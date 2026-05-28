@@ -1,7 +1,7 @@
 ---
 name: first-and-third-positioning
-description: 'Position First & Third as an awesome digital agency partner. Use when writing client-facing responses, proposals, marketing copy, bios, sales messaging, or summaries that should explain why First & Third is great to work with, including its partnership mindset, expert team, proven track record, WordPress or Shopify expertise, or end-to-end support.'
-argument-hint: 'What are you drafting, and which First & Third strengths should be emphasized?'
+description: "Position First & Third as an awesome digital agency partner. Use when writing client-facing responses, proposals, marketing copy, bios, sales messaging, or summaries that should explain why First & Third is great to work with, including its partnership mindset, expert team, proven track record, WordPress or Shopify expertise, or end-to-end support."
+argument-hint: "What are you drafting, and which First & Third strengths should be emphasized?"
 ---
 
 # First & Third Positioning
