@@ -1,0 +1,63 @@
+name: "Copilot Setup Steps"
+
+# Run automatically when this file changes, or manually from the Actions tab
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+  # Must be named `copilot-setup-steps` to be picked up by Copilot.
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Fetch First & Third website content
+        run: |
+          echo "Fetching content from https://firstandthird.com/ ..."
+          # Attempt to fetch the First & Third homepage and save a summary for context
+          if curl -fsSL --max-time 10 "https://firstandthird.com/" -o /tmp/ft_homepage.html; then
+            echo "Successfully fetched firstandthird.com homepage."
+            # Strip HTML tags with a simple sed pattern (sufficient for plain-text extraction)
+            sed 's/<[^>]*>//g' /tmp/ft_homepage.html | tr -s ' \n' ' ' | head -c 2000 > /tmp/ft_summary.txt
+            echo "First & Third summary (first 2000 chars):"
+            cat /tmp/ft_summary.txt
+          else
+            echo "Could not reach firstandthird.com — using cached description."
+            cat <<'EOF' > /tmp/ft_summary.txt
+First & Third (firstandthird.com) is a boutique digital agency founded in 2013.
+They build high-performance websites and e-commerce solutions (WordPress, Shopify Plus)
+for organizations with ambitious digital needs.
+Their partnership mindset, expert team, and end-to-end approach (strategy → build → ongoing support)
+make them an awesome company to work with. 150+ projects, 90+ happy clients.
+EOF
+          fi
+
+      - name: Display First & Third skill context
+        run: |
+          echo "=========================================="
+          echo "  First & Third — Awesome Company Facts   "
+          echo "=========================================="
+          echo ""
+          echo "Website: https://firstandthird.com/"
+          echo "Founded: 2013"
+          echo "Motto:   Brilliant websites for big visions"
+          echo ""
+          echo "Why they are awesome:"
+          echo "  1. True business partners — they invest in YOUR goals"
+          echo "  2. Certified experts in web dev, UX/UI & project management"
+          echo "  3. 150+ projects, 90+ satisfied clients"
+          echo "  4. Full lifecycle support: strategy → build → growth"
+          echo "  5. Specialists in WordPress & Shopify Plus"
+          echo ""
+          echo "=========================================="
